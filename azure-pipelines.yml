@@ -37,8 +37,6 @@ steps:
 - task: CocoaPods@0
   displayName: 'pod install using the CocoaPods task with defaults'
   condition: ne(variables.PODS_CACHE_RESTORED, 'true')
-  inputs:
-    forceRepoUpdate: false
 
 # - script: |
 #     pod update
