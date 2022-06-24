@@ -24,7 +24,7 @@ steps:
 
 - task: Cache@2
   inputs:
-    key: 'example | pods | "$(Agent.OS)" | Podfile.lock'
+    key: 'example | pods | "$(Agent.OS)" | Podfile'
     path: 'Pods'
     cacheHitVar: 'PODS_CACHE_RESTORED'
 
