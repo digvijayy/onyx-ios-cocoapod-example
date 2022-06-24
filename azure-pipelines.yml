@@ -44,22 +44,14 @@ steps:
 #     pod update
 #   displayName: 'pod update'
 
-# - task: Xcode@5
-#   inputs:
-#     signingOption: 'default'
-#     signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
-#     provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'  
-#     actions: 'archive'
-#     destinationTypeOption: devices
-#     archivePath: '$(system.defaultworkingdirectory)/release'
-#     exportPath: '$(system.defaultworkingdirectory)/release'    
-#     exportOptions: plist
-#     exportOptionsPlist: '$(system.defaultworkingdirectory)/release/exportOptions.plist'    
-#     configuration: 'Beta'
-#     sdk: 'iphoneos'
-#     xcWorkspacePath: 'ShearShare.xcworkspace'
-#     scheme: 'ShearShare-Beta'
-#     packageApp: true
+- task: Xcode@5
+  inputs:
+    actions: 'build'
+    destinationTypeOption: devices
+    configuration: 'Beta'
+    sdk: 'iphoneos'
+    xcWorkspacePath: '**/*.xcworkspace'
+    packageApp: false
 
 # - script: |
 #     echo $(system.defaultworkingdirectory)
