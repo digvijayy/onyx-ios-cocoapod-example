@@ -22,19 +22,9 @@ steps:
 #   displayName: 'pod install using the CocoaPods task with defaults'
 #   condition: ne(variables.PODS_CACHE_RESTORED, 'true')
 
-- task: InstallAppleCertificate@2
-  inputs:
-    certSecureFile: 'ssfe-ios-certificate-test.p12'
-    keychain: 'temp'
-
-- task: InstallAppleProvisioningProfile@1
-  inputs:
-    provisioningProfileLocation: 'secureFiles'
-    provProfileSecureFile: 'ssfe-ios-test.mobileprovision'
-
 - task: Cache@2
   inputs:
-    key: 'shearshare3 | pods | "$(Agent.OS)" | Podfile | ShearShare/ShearShare.xcodeproj/project.pbxproj'
+    key: 'example | pods | "$(Agent.OS)" | Podfile'
     path: 'Pods'
     cacheHitVar: 'PODS_CACHE_RESTORED'
 
