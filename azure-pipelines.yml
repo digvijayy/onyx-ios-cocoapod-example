@@ -1,0 +1,80 @@
+# Xcode
+# Build, test, and archive an Xcode workspace on macOS.
+# Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
+
+trigger:
+- main
+
+pool:
+  vmImage: 'macos-latest'
+
+steps:
+## - task: CmdLine@2
+##   inputs:
+##     script: 'sudo gem install cocoapods; pod install;'
+# - task: Cache@2
+#   inputs:
+#     key: 'pods | "$(Agent.OS)" | Podfile.lock'
+#     path: 'Pods'
+#     cacheHitVar: 'PODS_CACHE_RESTORED'
+# - task: CocoaPods@0
+#   displayName: 'pod install using the CocoaPods task with defaults'
+#   condition: ne(variables.PODS_CACHE_RESTORED, 'true')
+
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'ssfe-ios-certificate-test.p12'
+    keychain: 'temp'
+
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: 'ssfe-ios-test.mobileprovision'
+
+- task: Cache@2
+  inputs:
+    key: 'shearshare3 | pods | "$(Agent.OS)" | Podfile | ShearShare/ShearShare.xcodeproj/project.pbxproj'
+    path: 'Pods'
+    cacheHitVar: 'PODS_CACHE_RESTORED'
+
+# - script: |
+#     #sudo gem install cocoapods-binary
+#     xcode-select -print-path
+#     sudo xcode-select -switch 'ShearShare.app'
+#     xcode-select -print-path
+        
+- task: CocoaPods@0
+  displayName: 'pod install using the CocoaPods task with defaults'
+  condition: ne(variables.PODS_CACHE_RESTORED, 'true')
+  inputs:
+    forceRepoUpdate: false
+
+# - script: |
+#     pod update
+#   displayName: 'pod update'
+
+# - task: Xcode@5
+#   inputs:
+#     signingOption: 'default'
+#     signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+#     provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'  
+#     actions: 'archive'
+#     destinationTypeOption: devices
+#     archivePath: '$(system.defaultworkingdirectory)/release'
+#     exportPath: '$(system.defaultworkingdirectory)/release'    
+#     exportOptions: plist
+#     exportOptionsPlist: '$(system.defaultworkingdirectory)/release/exportOptions.plist'    
+#     configuration: 'Beta'
+#     sdk: 'iphoneos'
+#     xcWorkspacePath: 'ShearShare.xcworkspace'
+#     scheme: 'ShearShare-Beta'
+#     packageApp: true
+
+# - script: |
+#     echo $(system.defaultworkingdirectory)
+#     sudo apt install -y wget
+#     sudo wget https://github.com/firebase/firebase-tools/releases/download/v11.0.1/firebase-tools-linux
+#     sudo chmod +x ./firebase-tools-linux
+#     ./firebase-tools-linux appdistribution:distribute $(system.defaultworkingdirectory)/release/ShearShare-Beta.ipa --app $(APP_ID) --groups $(TEST_GROUP_ID) --token "$(FIREBASE_TOKEN)" --release-notes-file ReleaseNotes.txt
+#   displayName: 'Firebase Upload'
