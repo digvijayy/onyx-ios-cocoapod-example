@@ -48,7 +48,7 @@ steps:
     destinationTypeOption: devices
     configuration: 'Beta'
     sdk: 'iphoneos'
-    xcWorkspacePath: '**/*.xcworkspace'
+    xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
     packageApp: false
 
 # - script: |
