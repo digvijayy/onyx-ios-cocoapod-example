@@ -38,7 +38,7 @@ steps:
   displayName: 'pod install using the CocoaPods task with defaults'
   condition: ne(variables.PODS_CACHE_RESTORED, 'true')
   inputs:
-    workingDirectory: 'Pods'
+    workingDirectory: '$(System.DefaultWorkingDirectory'
 
 # - script: |
 #     pod update
