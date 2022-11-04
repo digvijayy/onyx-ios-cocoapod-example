@@ -1,0 +1,36 @@
+PODS:
+  - iCarousel (1.8.3)
+  - OnyxCamera (7.1.9):
+    - OpenCV (= 3.4.5)
+    - TensorFlowLiteObjC
+  - OpenCV (3.4.5)
+  - TensorFlowLiteC (2.10.0):
+    - TensorFlowLiteC/Core (= 2.10.0)
+  - TensorFlowLiteC/Core (2.10.0)
+  - TensorFlowLiteObjC (2.10.0):
+    - TensorFlowLiteObjC/Core (= 2.10.0)
+  - TensorFlowLiteObjC/Core (2.10.0):
+    - TensorFlowLiteC (= 2.10.0)
+
+DEPENDENCIES:
+  - iCarousel
+  - OnyxCamera (= 7.1.9)
+
+SPEC REPOS:
+  trunk:
+    - iCarousel
+    - OnyxCamera
+    - OpenCV
+    - TensorFlowLiteC
+    - TensorFlowLiteObjC
+
+SPEC CHECKSUMS:
+  iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
+  OnyxCamera: 021382b8d8580e346ca5f02f30ec79a0fc2e56f0
+  OpenCV: 4171c39bdb17e65abda91fc8195d44cb347750f7
+  TensorFlowLiteC: edf19548f50a1552e43dbd6906f5618a478bd038
+  TensorFlowLiteObjC: 849af9ce3668b59b1f4a1902fad12a7ebf2cea70
+
+PODFILE CHECKSUM: 065e7002eb6617c9d60fdec1bd2d20b38f487f43
+
+COCOAPODS: 1.11.3
